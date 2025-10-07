@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>لعبة خوف ياسر شوتر | khof yasser shooter | FPS شوتر أونلاين</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="mode-switch-container">
+        <label class="switch">
+            <input type="checkbox" id="modeToggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <header class="hero-section">
+        <h1 class="interactive-title">خوف ياسر شوتر | khof yasser shooter</h1>
+        <p>جرب الإثارة. لعبة FPS شوتر أونلاين جديدة بالكامل، مطورة بمحرك Godot.</p>
+    </header>
+
+    <section class="features">
+        <h2>أفضل مميزات اللعبة</h2>
+        <div class="feature-item">
+            <h3>اللعبة معمولة من ولد عنده 12 سنة</h3>
+            <p>تم تطويرها باستخدام محرك Godot</p>
+        </div>
+        <div class="feature-item">
+            <h3>إطلاق نار غير واقعي للامانة 👀</h3>
+            <p>جرب تلعب بياسر , عامر , بروستي شان و "عمك" الليجينداري</p>
+        </div>
+    </section>
+
+    <section class="feedback-section">
+        <h2>شاركنا رأيك أو أبلغ عن مشكلة</h2>
+        
+        <form action="https://formspree.io/f/mdkwlawj" method="POST" class="feedback-form">
+            
+            <input type="hidden" name="_subject" value="رسالة جديدة من موقع خوف ياسر شوتر">
+            <input type="hidden" name="المصدر" value="موقع اللعبة (hamza)">
+            
+            <input type="email" name="البريد_الإلكتروني" placeholder="بريدك الإلكتروني (اختياري)" required>
+            <textarea name="الرسالة" placeholder="اكتب رسالتك أو المشكلة بالتفصيل..." rows="5" required></textarea>
+            
+            <button type="submit" class="cta-button">إرسال Feedback</button>
+            <p class="form-note">يتم إرسال الرسائل مباشرةً لبريد المطور حمزة.</p>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 خوف ياسر شوتر | khof yasser shooter. كل الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // 1. كود تكبير الكلمات التفاعلي
+        const titleElement = document.querySelector('.interactive-title');
+        const text = titleElement.textContent.trim();
+        titleElement.textContent = '';
+
+        const words = text.split(/(\s+)/); 
+
+        words.forEach(word => {
+            if (word.trim() === '') return;
+
+            const span = document.createElement('span');
+            span.textContent = word;
+            span.classList.add('word'); 
+            span.style.marginRight = '10px'; 
+            
+            titleElement.appendChild(span);
+        });
+
+        // 2. كود الـ Switch للـ Light/Dark Mode
+        const toggle = document.getElementById('modeToggle');
+        const body = document.body;
+
+        // وظيفة لتحميل الإعدادات المحفوظة
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light-mode') {
+                body.classList.add('light-mode');
+                toggle.checked = true;
+            }
+        }
+
+        // وظيفة لتبديل الثيم
+        function toggleTheme() {
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light-mode');
+            }
+        }
+
+        // تطبيق الثيم المحفوظ عند تحميل الصفحة
+        loadTheme();
+
+        // الاستماع لزر التبديل
+        toggle.addEventListener('change', toggleTheme);
+    </script>
+</body>
+</html>

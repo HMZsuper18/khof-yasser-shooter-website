@@ -1,0 +1,310 @@
+/* إعادة تعيين التنسيقات الافتراضية للمتصفحات */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* transition: تم الحفاظ عليه للتغيرات اللونية */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+/* --- الألوان الأساسية (Dark Mode - الوضع الافتراضي) --- */
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    text-align: right;
+    line-height: 1.6;
+}
+
+/* العناوين الرئيسية والفرعية في Dark Mode تكون برتقالية */
+.interactive-title, 
+.features h2, 
+.feedback-section h2,
+.feature-item h3 { 
+    color: #ff4500; 
+}
+
+.feature-item {
+    background-color: #2a2a2a;
+    /* التحديد الجانبي برتقالي في Dark Mode */
+    border-left: 3px solid #ff4500; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transform-style: flat; 
+}
+
+/* زر الدعوة لاتخاذ إجراء (CTA) */
+.cta-button {
+    background-color: #ff4500;
+    color: #1a1a1a;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+}
+.cta-button:hover {
+    background-color: #e63900;
+}
+
+/* تفاعل المميزات في Dark Mode (ظل برتقالي) */
+.feature-item:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 153, 0, 0.7); 
+}
+
+.feedback-section {
+    background-color: #222222;
+}
+
+.feedback-form input[type="email"],
+.feedback-form textarea {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+footer {
+    border-top: 1px solid #333;
+    color: #888;
+}
+
+/* تفاعل الكلمات في Dark Mode (سماوي) */
+.word:hover {
+    transform: scale(1.15); 
+    color: #00bcd4; 
+}
+
+/* --- ألوان الـ Light Mode (الوضع الفاتح) --- */
+body.light-mode {
+    background-color: #f7f7f7; 
+    color: #333; 
+}
+
+/* العناوين الرئيسية والفرعية في Light Mode تكون سماوية */
+body.light-mode .interactive-title, 
+body.light-mode .features h2, 
+body.light-mode .feedback-section h2,
+body.light-mode .feature-item h3 {
+    color: #00bcd4; 
+}
+
+/* تثبيت لون نص المقدمة ليظهر بوضوح */
+body.light-mode .hero-section p {
+    color: #333 !important; 
+}
+
+body.light-mode .interactive-title {
+    text-shadow: none; 
+}
+
+/* جعل التحديد الجانبي سماوي في Light Mode */
+body.light-mode .feature-item {
+    background-color: #ffffff; 
+    border-left: 3px solid #00bcd4; /* سماوي */
+}
+
+/* تغيير خلفية الـ Feedback لـ Light Mode */
+body.light-mode .feedback-section {
+    background-color: #ffffff; 
+}
+
+body.light-mode .feedback-form input[type="email"],
+body.light-mode .feedback-form textarea {
+    background-color: #ffffff;
+    color: #333; 
+    border: 1px solid #ccc;
+}
+
+body.light-mode .cta-button {
+    background-color: #00bcd4; 
+    color: #1a1a1a;
+    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+}
+
+body.light-mode .cta-button:hover {
+    background-color: #00acc1;
+}
+
+/* تفاعل المميزات في Light Mode (ظل سماوي) */
+body.light-mode .feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 188, 212, 0.7); 
+}
+
+body.light-mode footer {
+    border-top: 1px solid #ddd;
+    color: #555;
+}
+
+/* تفاعل الكلمات في Light Mode (برتقالي) */
+body.light-mode .word:hover {
+    transform: scale(1.15); 
+    color: #ff4500; 
+}
+
+/* تنسيق قسم المقدمة الرئيسية */
+.hero-section {
+    padding: 120px 50px;
+    /* ⬅️ تم حذف background-image */
+    background: #1a1a1a; 
+    text-align: center;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* ⬅️ تعديل خلفية الـ hero-section في وضع الـ Light Mode */
+body.light-mode .hero-section {
+    background: #f7f7f7; 
+}
+
+/* --- تنسيق الـ Switch --- */
+.mode-switch-container {
+    position: absolute;
+    top: 20px;
+    left: 20px; 
+    z-index: 100;
+}
+.switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc; -webkit-transition: .4s; transition: .4s;
+}
+.slider:before {
+    position: absolute; content: "🌙"; height: 26px; width: 26px; left: 4px; bottom: 4px;
+    background-color: #1a1a1a; -webkit-transition: .4s; transition: .4s;
+    border-radius: 50%; text-align: center; line-height: 26px; font-size: 18px;
+}
+/* الـ Slider لونه برتقالي في Light Mode */
+input:checked + .slider { background-color: #ff4500; } 
+/* أيقونة الشمس بلون سماوي في Light Mode */
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px); -ms-transform: translateX(26px);
+    transform: translateX(26px); content: "☀️"; 
+    background-color: #fff; color: #00bcd4; 
+}
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* تنسيق العنوان التفاعلي */
+.interactive-title {
+    font-size: 4em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px #000;
+    cursor: default;
+    display: block; 
+    text-align: center;
+    direction: rtl; 
+}
+
+
+/* تنسيق الكلمة الواحدة (Word) */
+.word {
+    display: inline-block;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    direction: inherit; 
+    unicode-bidi: inherit;
+}
+
+/* تنسيق قسم المميزات والـ Feedback */
+.features {
+    padding: 60px 50px;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    perspective: none;
+}
+
+.features h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.feature-item {
+    padding: 20px;
+    border-radius: 10px;
+    width: 45%; 
+    min-width: 300px;
+}
+
+.feedback-section {
+    text-align: center;
+}
+
+.feedback-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: right;
+}
+
+.feedback-form input[type="email"],
+.feedback-form textarea {
+    padding: 15px;
+    border-radius: 5px;
+    width: 100%;
+    resize: vertical;
+}
+
+.form-note {
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+.cta-button {
+    display: block;
+    width: 100%;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* تنسيق الفوتر */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+}
+
+
+/* --- جزء التجاوب (Responsive Design) 📱 --- */
+@media (max-width: 768px) {
+    
+    .hero-section {
+        padding: 80px 20px;
+    }
+
+    .interactive-title {
+        font-size: 2.5em;
+        transform: none !important; 
+    }
+    
+    /* إلغاء التكبير في الموبايل */
+    .word:hover {
+        transform: none;
+        color: inherit; 
+    }
+
+    .features, .feedback-section {
+        padding: 40px 20px;
+    }
+
+    .features {
+        flex-direction: column; 
+    }
+
+    .feature-item {
+        width: 100%; 
+        min-width: unset;
+    }
+}
